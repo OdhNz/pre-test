@@ -1,0 +1,17 @@
+The Rails routing system handles requests in a unique way. It examines the URL of incoming requests and determines the controller action responsible for handling each request. It makes use of the special syntax specified in the routes file, config/routes.rb, in doing this mapping. This routes file controls every URL aspect of web application.
+
+Grape API need include mount at routes.rb if want run at ruby on rails application.
+
+grape need defined a route on same module file, on grape api i’m define a routes at this file app/api/person/user.rb if run a server and go to this URL http://localhost:3000/api/person/users
+
+grape routing working like rails app, same concept use MVC. I mean when request come, it will go to routes rails first, and Rack will check if the url have prefix “api” and will process to grape API engine, Grape API will find a base URL and will mount the process.
+
+Implementation routing at grape API same like implement route at sinatra freamwork, all route is define at same module and if path (“/”) is true, the routes will give output that has been specified.
+
+has the same properties as routes on rails
+
+How compare rails and grape route :
+rails framework routing use routes.rb, and will process to controllers, and will processing the request
+grape API routing use mount at routes.rb, when request come, the request will go to routes rails app, and forwarded to grape api module, and after processing at module finish the request will have a some output.
+
+Grape endpoints (classes inheriting from Grape::API) are basically equivalent to Rails controllers. As such, they can contain many unrelated methods (index/show/delete/create). Grape is very suitable for microservice method.

@@ -1,0 +1,7 @@
+#implement rails app route
+
+Rails.application.routes.draw do
+	resources :bank_accounts
+
+	mount ActionCable.server => '/cable'
+end

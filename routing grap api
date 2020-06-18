@@ -1,0 +1,33 @@
+#implement routing grape api
+
+
+get :users do
+	users = ::User.all
+	present :users, users, with: Person::Entities::UserResult
+end
+
+# user
+desc "'return name at User model'" do
+	succes model: Person::Entities::UserResult, examples: {
+	'application/json': {
+
+	},
+	}
+	failure [
+		[400, "'Cant be load user'"],
+		[500, "'unknow'"]
+	]
+end
+
+params do 
+	optional :name, type: String, allow_blank: false, documentation: {
+	description: "name",
+	example: "user1"
+	} 
+	at_least_one_of :name
+end
+
+get :user do
+	user = ::User,find_by(name: params["name"]) || "Cant find #{params["name"]}"
+	present :user, user
+end
